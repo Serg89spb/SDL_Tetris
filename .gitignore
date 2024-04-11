@@ -1,7 +1,11 @@
 .vs/
+/Tetris/x64/Debug/Tetris.tlog
 
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+*.exe
+*.pdb
+

@@ -24,7 +24,10 @@
     <ClCompile Include="Src\Drawable\DrawableUnit.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Utils\staticLibrary.cpp">
+    <ClCompile Include="Src\Utils\Log.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Drawable\Drawable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +44,10 @@
     <ClInclude Include="Src\Utils\color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Utils\staticLibrary.h">
+    <ClInclude Include="Src\Utils\Log.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Drawable\Drawable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

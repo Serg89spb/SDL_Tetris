@@ -1,5 +1,2 @@
-﻿  Game.cpp
-  Main.cpp
-  staticLibrary.cpp
-  Создание кода...
+﻿  DrawableUnit.cpp
   Tetris.vcxproj -> C:\dev\DevProjects\SDL_Tetris\Tetris\x64\Debug\Tetris.exe

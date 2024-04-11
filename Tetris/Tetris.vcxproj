@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -112,7 +112,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tetris\vendor\spdlog\include;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +130,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tetris\vendor\spdlog\include;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,16 +143,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Drawable\Drawable.cpp" />
     <ClCompile Include="Src\Drawable\DrawableUnit.cpp" />
     <ClCompile Include="Src\Core\Game.cpp" />
     <ClCompile Include="Src\Core\Main.cpp" />
-    <ClCompile Include="Src\Utils\staticLibrary.cpp" />
+    <ClCompile Include="Src\Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Drawable\Drawable.h" />
     <ClInclude Include="Src\Drawable\DrawableUnit.h" />
     <ClInclude Include="Src\Core\Game.h" />
     <ClInclude Include="Src\Utils\color.h" />
-    <ClInclude Include="Src\Utils\staticLibrary.h" />
+    <ClInclude Include="Src\Utils\Log.h" />
     <ClInclude Include="Src\Utils\vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

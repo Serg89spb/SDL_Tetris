@@ -1,6 +1,8 @@
 #pragma once
-
 #include <SDL_stdinc.h>
+
+namespace Tetris
+{
 
 struct color
 {
@@ -12,3 +14,5 @@ struct color
     Uint8 b = 0;
     Uint8 a = 0;
 };
+
+}  // namespace Tetris

@@ -1,12 +1,14 @@
 #include "Game.h"
-#include "Utils/staticLibrary.h"
+#include "Utils/Log.h"
 
 int main(int argc, char** argv)
 {
-    GlobalGame = new Game();
+    Tetris::Log::Init();
+    Tetris::Game game = Tetris::Game();
 
-    GlobalGame->InitSDL();
-    GlobalGame->Play();
-
+    if (game.initSDL())
+    {
+        game.update();
+    }
     return 0;
 }

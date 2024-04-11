@@ -1,5 +1,8 @@
 #pragma once
 
+namespace Tetris
+{
+
 template <typename T>
 struct vec2
 {
@@ -48,3 +51,5 @@ vec2<T> vec2<T>::operator/(const T& s) const
     const T rs = 1.f / s;
     return {x * rs, y * rs};
 };
+
+}  // namespace Tetris

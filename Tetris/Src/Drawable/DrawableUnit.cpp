@@ -1,18 +1,37 @@
 #include <cstdio>
-
 #include "DrawableUnit.h"
-#include "Utils/staticLibrary.h"
+#include "SDL.h"
+#include "Utils/Log.h"
 
-DrawableUnit::DrawableUnit(vec2<int> location, vec2<int> size, const color& color) : _location(location), _size(size), _color(color)
+namespace Tetris
 {
-    const SDL_Rect rect = {location.x, location.y, size.x, size.y};
-    if (const auto renderer = staticLibrary::getRenderer())
+
+DrawableUnit::DrawableUnit(vec2<int> location, vec2<int> size, const color& color)
+    : _location(location), _size(size), _color(color), _renderer(nullptr)
+{
+    _rect = {location.x, location.y, size.x, size.y};
+}
+
+void DrawableUnit::draw() const
+{
+    if (_renderer)
     {
-        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-        SDL_RenderFillRect(renderer, &rect);
+        SDL_SetRenderDrawColor(_renderer, _color.r, _color.g, _color.b, _color.a);
+        SDL_RenderFillRect(_renderer, &_rect);
     }
     else
     {
-        printf("renderer not exist! \n");
+        TETRIS_ERROR("{0}: renderer is nullptr", __FUNCTION__);
     }
 }
+
+void DrawableUnit::render(SDL_Renderer* renderer)
+{
+    if (!renderer)
+    {
+        TETRIS_ERROR("{0}: renderer is nullptr", __FUNCTION__);
+        return;
+    }
+    _renderer = renderer;
+}
+}  // namespace Tetris
