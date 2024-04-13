@@ -1,17 +1,13 @@
 #include "Game.h"
-#include <cstdio>
-#include <SDL_image.h>
-#include <cmath>
-
-#include "Drawable/DrawableUnit.h"
-#include "Utils/color.h"
-#include "Utils/vec2.h"
-#include "Utils/Log.h"
+#include "TetrisCore.h"
+#include "Drawable/AreaElement.h"
+#include "Drawable/Brick.h"
+#include "Drawable/Figure.h"
 
 namespace Tetris
 {
 
-Game::Game() : _win_width(400), _win_height(800) {}
+Game::Game() {}
 
 Game::~Game() {}
 
@@ -22,9 +18,10 @@ bool Game::initSDL()
         TETRIS_ERROR("SDL Init Error {0}", SDL_GetError());
         return false;
     }
-    constexpr Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE;
+    constexpr Uint32 window_flags = SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL;
 
-    _window = SDL_CreateWindow("SDL Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _win_width, _win_height, window_flags);
+    _window = SDL_CreateWindow(
+        "SDL Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _win_absolute_size.x, _win_absolute_size.y, window_flags);
     if (!_window)
     {
         TETRIS_ERROR("SDL window not create! SDL Error: {0}", SDL_GetError());
@@ -37,6 +34,12 @@ bool Game::initSDL()
         TETRIS_ERROR("SDL render not create! SDL Error: {0}", SDL_GetError());
         return false;
     }
+
+    _lastFrameTime = SDL_GetTicks();
+
+    _spawnPos = {getRandomInt(1, 8), 0};
+    _spawnFigureIndex = getRandomInt(0, 4);
+
     return true;
 }
 
@@ -58,31 +61,56 @@ void Game::update()
             }
         }
 
-        SDL_SetRenderDrawColor(_renderer, 0x00, 0x00, 0x00, 0x00);
+        const auto bg = color::background;
+        SDL_SetRenderDrawColor(_renderer, bg.r, bg.g, bg.b, bg.a);
         SDL_RenderClear(_renderer);
 
         gameRender();
 
         SDL_RenderPresent(_renderer);
+
+        limitFPS(60);
     }
 }
 
 void Game::gameRender()
 {
+    AreaElement frame;
+    frame.render(_renderer);
+    frame.createFrame();
+
     drawFigure();
 }
 
 void Game::drawFigure()
 {
-    if (!_renderer) return;
+    if (_testFrameCounter == _testDelay)
+    {
+        _testFrameCounter = 0;
+        _spawnPos = {_spawnPos.x, _spawnPos.y + 1};
 
-    const color color(0xFF, 0xFF, 0xFF, 0xFF);
-    const vec2<int> pos(0, 0);
-    const vec2<int> size(40, 40);
+        TETRIS_INFO("y: {0}", _spawnPos.y);
 
-    DrawableUnit unit(pos, size, color);
-    unit.render(_renderer);
-    unit.draw();
+        if (_spawnPos.y == GameField::maxY)
+        {
+            _spawnPos = {getRandomInt(1, 8), 0};
+            _spawnFigureIndex = getRandomInt(0, 4);
+        }
+    }
+    _testFrameCounter++;
+
+    Figure figure;
+    figure.render(_renderer);
+    figure.create(_spawnFigureIndex, _spawnPos);
 }
 
+void Game::limitFPS(Uint32 fpsLimit)
+{
+    const Uint32 delta = SDL_GetTicks() - _lastFrameTime;
+    if (delta < 1000 / fpsLimit)
+    {
+        SDL_Delay(1000 / fpsLimit - delta);
+    }
+    _lastFrameTime = SDL_GetTicks();
+}
 }  // namespace Tetris

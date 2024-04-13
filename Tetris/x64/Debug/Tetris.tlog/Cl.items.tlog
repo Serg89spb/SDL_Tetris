@@ -1,5 +1,8 @@
+C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Drawable\Figure.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Figure.obj
+C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Drawable\AreaElement.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\AreaElement.obj
 C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Drawable\Drawable.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Drawable.obj
-C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Drawable\DrawableUnit.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\DrawableUnit.obj
+C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Drawable\Brick.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Brick.obj
 C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Core\Game.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Game.obj
 C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Core\Main.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Main.obj
+C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Utils\color.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\color.obj
 C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\Src\Utils\Log.cpp;C:\dev\DevProjects\SDL_Tetris\Tetris\Tetris\x64\Debug\Log.obj

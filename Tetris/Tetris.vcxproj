@@ -143,18 +143,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Drawable\Figure.cpp" />
+    <ClCompile Include="Src\Drawable\AreaElement.cpp" />
     <ClCompile Include="Src\Drawable\Drawable.cpp" />
-    <ClCompile Include="Src\Drawable\DrawableUnit.cpp" />
+    <ClCompile Include="Src\Drawable\Brick.cpp" />
     <ClCompile Include="Src\Core\Game.cpp" />
     <ClCompile Include="Src\Core\Main.cpp" />
+    <ClCompile Include="Src\Utils\color.cpp" />
     <ClCompile Include="Src\Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Drawable\Figure.h" />
+    <ClInclude Include="Src\TetrisFuncLibray.h" />
+    <ClInclude Include="Src\TetrisCore.h" />
+    <ClInclude Include="Src\Drawable\AreaElement.h" />
     <ClInclude Include="Src\Drawable\Drawable.h" />
-    <ClInclude Include="Src\Drawable\DrawableUnit.h" />
+    <ClInclude Include="Src\Drawable\Brick.h" />
     <ClInclude Include="Src\Core\Game.h" />
     <ClInclude Include="Src\Utils\color.h" />
     <ClInclude Include="Src\Utils\Log.h" />
+    <ClInclude Include="Src\variables.h" />
     <ClInclude Include="Src\Utils\vec2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
