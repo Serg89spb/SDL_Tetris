@@ -2,45 +2,53 @@
 
 #include <vector>
 
-#include "SDL.h"
-#include "variables.h"
-#include "Utils/vec2.h"
+#include "TetrisCore.h"
+#include "Input.h"
+#include "Drawable/Figure.h"
 
-namespace Tetris
+namespace tetris
 {
 
 class Game
 {
 public:
-    Game();
-    ~Game();
+    Game() = default;
 
-    bool initSDL();
+    bool init_sdl();
     void update();
 
-    SDL_Window* getWindow() const { return _window; }
-    SDL_Renderer* getRenderer() const { return _renderer; }
+    SDL_Window* get_window() const { return window_; }
+    SDL_Renderer* get_renderer() const { return renderer_; }
 
 private:
-    bool _running = true;
+    bool running_ = true;
 
-    vec2<int> _all_field_size = {17, 25};
-    vec2<int> _win_absolute_size = _all_field_size * unit;
-    vec2<int> _game_field_size = {GameField::maxX, GameField::maxY};
+    Uint32 last_frame_time_ = 0;
+    Uint32 invert_game_speed_ = 25;
+    Uint32 game_counter_ = 0;
 
-    SDL_Window* _window = nullptr;
-    SDL_Renderer* _renderer = nullptr;
+    vec2<int> all_field_size_ = {17, 25};
+    vec2<int> win_absolute_size_ = all_field_size_ * unit;
+    vec2<int> game_field_size_ = {game_field::max_x, game_field::max_y};
 
-    Uint32 _lastFrameTime = 0;
+    SDL_Window* window_ = nullptr;
+    SDL_Renderer* renderer_ = nullptr;
+    SDL_Event input_event_{};
+    Input input_{};
 
-    Uint32 _testDelay = 15;
-    Uint32 _testFrameCounter = 0;
+    Figure current_fig_{};
 
-    vec2<int> _spawnPos{};
-    int _spawnFigureIndex = 0;
+    std::vector<vec2<int>> bottom_bricks_pos_;
+    std::vector<int> rmv_y_{};
+    int rmv_x_ = game_field::max_x;
 
-    void gameRender();
-    void drawFigure();
-    void limitFPS(Uint32 fpsLimit);
+    void game_render();
+    void draw_figure();
+    void draw_bottom_bricks() const;
+    void check_line_filled();
+    void start_remove_if_filled();
+    void shift_after_remove(const int rmv_y);
+
+    void limit_fps(Uint32 fps_limit);
 };
-}  // namespace Tetris
+}  // namespace tetris

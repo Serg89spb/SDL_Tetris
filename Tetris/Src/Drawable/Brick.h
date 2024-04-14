@@ -5,7 +5,7 @@
 #include "Drawable.h"
 #include "Utils/vec2.h"
 
-namespace Tetris
+namespace tetris
 {
 
 class Brick : public Drawable
@@ -18,11 +18,13 @@ public:
     void render(SDL_Renderer* renderer) override;
     void draw() override;
 
-private:
-    vec2<int> _location{};
-    vec2<int> _size{};
+    vec2<int> get_location() const { return location_; }
 
-    std::vector<SDL_Rect> _rects;
+protected:
+    vec2<int> location_{};
+
+private:
+    std::vector<SDL_Rect> rects_;
 };
 
-}  // namespace Tetris
+}  // namespace tetris

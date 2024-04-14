@@ -1,18 +1,17 @@
 #pragma once
 #include "Drawable.h"
 
-namespace Tetris
+namespace tetris
 {
 
 class AreaElement : public Drawable
 {
 public:
-    AreaElement() {}
+    AreaElement() = default;
 
     void render(SDL_Renderer* renderer) override;
-    void draw() override;
-
-    void createFrame() const;
+    void draw() override {}
+    void create_frame() const;
 };
 
-}  // namespace Tetris
+}  // namespace tetris

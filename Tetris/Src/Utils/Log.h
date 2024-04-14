@@ -2,23 +2,23 @@
 
 #include "spdlog/spdlog.h"
 
-namespace Tetris
+namespace tetris
 {
 
 class Log
 {
 public:
-    static void Init();
+    static void init();
 
-    inline static std::shared_ptr<spdlog::logger>& GetLogger() { return s_Logger; }
+    inline static std::shared_ptr<spdlog::logger>& get_logger() { return s_logger_; }
 
 private:
-    static std::shared_ptr<spdlog::logger> s_Logger;
+    static std::shared_ptr<spdlog::logger> s_logger_;
 };
 
-}  // namespace Tetris
+}  // namespace tetris
 
-#define TETRIS_TRACE(...) ::Tetris::Log::GetLogger()->trace(__VA_ARGS__)
-#define TETRIS_INFO(...) ::Tetris::Log::GetLogger()->info(__VA_ARGS__)
-#define TETRIS_WARN(...) ::Tetris::Log::GetLogger()->warn(__VA_ARGS__)
-#define TETRIS_ERROR(...) ::Tetris::Log::GetLogger()->error(__VA_ARGS__)
+#define TETRIS_TRACE(...) ::tetris::Log::get_logger()->trace(__VA_ARGS__)
+#define TETRIS_INFO(...) ::tetris::Log::get_logger()->info(__VA_ARGS__)
+#define TETRIS_WARN(...) ::tetris::Log::get_logger()->warn(__VA_ARGS__)
+#define TETRIS_ERROR(...) ::tetris::Log::get_logger()->error(__VA_ARGS__)

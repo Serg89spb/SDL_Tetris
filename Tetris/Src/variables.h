@@ -2,21 +2,21 @@
 
 #include <vector>
 
-namespace Tetris
+namespace tetris
 {
 constexpr int unit = 32;
 
-namespace GameField
+namespace game_field
 {
-constexpr int minX = 0;
-constexpr int maxX = 9;
-constexpr int minY = 0;
-constexpr int maxY = 19;
-}  // namespace GameField
+constexpr int min_x = 0;
+constexpr int max_x = 9;
+constexpr int min_y = 4;
+constexpr int max_y = 24;
+}  // namespace game_field
 
-namespace Frame
+namespace frame
 {
-constexpr int yOffset = 4;
+constexpr int y_offset = 4;
 }
 
-}  // namespace Tetris
+}  // namespace tetris

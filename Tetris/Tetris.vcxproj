@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Core\Input.cpp" />
     <ClCompile Include="Src\Drawable\Figure.cpp" />
     <ClCompile Include="Src\Drawable\AreaElement.cpp" />
     <ClCompile Include="Src\Drawable\Drawable.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Src\Utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Core\Input.h" />
     <ClInclude Include="Src\Drawable\Figure.h" />
     <ClInclude Include="Src\TetrisFuncLibray.h" />
     <ClInclude Include="Src\TetrisCore.h" />

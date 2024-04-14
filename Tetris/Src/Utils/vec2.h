@@ -1,18 +1,19 @@
 #pragma once
 
-namespace Tetris
+namespace tetris
 {
 
 template <typename T>
 struct vec2
 {
     vec2<T>();
-    vec2<T>(T _x, T _y);
+    vec2<T>(T x, T y);
 
     vec2<T> operator+(const vec2<T>& v) const;
     vec2<T> operator-(const vec2<T>& v) const;
     vec2<T> operator*(const T& s) const;
     vec2<T> operator/(const T& s) const;
+    bool operator==(const vec2<T>& v) const;
 
     T x, y;
 };
@@ -23,7 +24,7 @@ vec2<T>::vec2() : x{}, y{}
 }
 
 template <typename T>
-vec2<T>::vec2(T _x, T _y) : x(_x), y(_y)
+vec2<T>::vec2(T x, T y) : x(x), y(y)
 {
 }
 
@@ -52,4 +53,10 @@ vec2<T> vec2<T>::operator/(const T& s) const
     return {x * rs, y * rs};
 };
 
-}  // namespace Tetris
+template <typename T>
+bool vec2<T>::operator==(const vec2<T>& v) const
+{
+    return x == v.x && y == v.y;
+};
+
+}  // namespace tetris

@@ -3,10 +3,10 @@
 
 int main(int argc, char** argv)
 {
-    Tetris::Log::Init();
-    Tetris::Game game = Tetris::Game();
+    tetris::Log::init();
+    auto game = tetris::Game();
 
-    if (game.initSDL())
+    if (game.init_sdl())
     {
         game.update();
     }

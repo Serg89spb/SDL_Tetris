@@ -1,46 +1,51 @@
 #include <cstdio>
 #include "Brick.h"
 #include "TetrisCore.h"
-#include <algorithm>
 
-namespace Tetris
+namespace tetris
 {
 namespace
 {
 vec2<int> size = {unit, unit};
-constexpr int Offset1 = 1;
-constexpr int Offset2 = 3;
-constexpr int Offset3 = 7;
+constexpr int offset1 = 1;
+constexpr int offset2 = 3;
+constexpr int offset3 = 6;
 }  // namespace
 
-Brick::Brick(vec2<int> location) : _location(location)
+Brick::Brick(const vec2<int> location) : location_(location)
 {
-    _location = _location * unit;
-    _location.x = clamp(_location.x, GameField::minX * unit, GameField::maxX * unit);
-    _location.y = clamp(_location.y, GameField::minY * unit, GameField::maxY * unit) + Frame::yOffset * unit;
+    location_ = location_ * unit;
 
-    _rects.push_back({_location.x, _location.y, size.x, size.y});
-    _rects.push_back({_location.x + Offset1, _location.y + Offset1, size.x - Offset1 * 2, size.y - Offset1 * 2});
-    _rects.push_back({_location.x + Offset2, _location.y + Offset2, size.x - Offset2 * 2, size.y - Offset2 * 2});
-    _rects.push_back({_location.x + Offset3, _location.y + Offset3, size.x - Offset3 * 2, size.y - Offset3 * 2});
+    rects_.push_back({location_.x, location_.y, size.x, size.y});
+    rects_.push_back({location_.x + offset1, location_.y + offset1, size.x - offset1 * 2, size.y - offset1 * 2});
+    rects_.push_back({location_.x + offset2, location_.y + offset2, size.x - offset2 * 2, size.y - offset2 * 2});
+    rects_.push_back({location_.x + offset3, location_.y + offset3, size.x - offset3 * 2, size.y - offset3 * 2});
 }
 
 void Brick::draw()
 {
-    if (_renderer)
+    if (!renderer_)
     {
-        bool isBgColor = true;
-        for (const auto& rect : _rects)
-        {
-            const auto clr = isBgColor ? _bg : _fl;
-            SDL_SetRenderDrawColor(_renderer, clr.r, clr.g, clr.b, clr.a);
-            SDL_RenderFillRect(_renderer, &rect);
-            isBgColor = !isBgColor;
-        }
+        throw std::runtime_error("renderer must be initialized");
     }
-    else
+
+    bool render_rect = true;
+    if (location_.x < game_field::min_x * unit || location_.x > game_field::max_x * unit ||  //
+        location_.y < game_field::min_y * unit || location_.y > game_field::max_y * unit)    //
     {
-        TETRIS_ERROR("{0}: renderer is nullptr", __FUNCTION__);
+        render_rect = false;
+    }
+
+    if (render_rect)
+    {
+        bool is_bg_color = true;
+        for (const auto& rect : rects_)
+        {
+            const auto clr = is_bg_color ? bg_ : fl_;
+            SDL_SetRenderDrawColor(renderer_, clr.r, clr.g, clr.b, clr.a);
+            SDL_RenderFillRect(renderer_, &rect);
+            is_bg_color = !is_bg_color;
+        }
     }
 }
 
@@ -48,9 +53,8 @@ void Brick::render(SDL_Renderer* renderer)
 {
     if (!renderer)
     {
-        TETRIS_ERROR("{0}: renderer is nullptr", __FUNCTION__);
-        return;
+        throw std::runtime_error("renderer must be initialized");
     }
-    _renderer = renderer;
+    renderer_ = renderer;
 }
-}  // namespace Tetris
+}  // namespace tetris

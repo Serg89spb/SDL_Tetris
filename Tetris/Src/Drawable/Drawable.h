@@ -3,7 +3,7 @@
 
 #include "Utils/color.h"
 
-namespace Tetris
+namespace tetris
 {
 
 class Drawable
@@ -15,9 +15,9 @@ public:
     virtual void draw() = 0;
 
 protected:
-    SDL_Renderer* _renderer = nullptr;
-    color _bg = color::background;
-    color _fl = color::fill;
+    SDL_Renderer* renderer_ = nullptr;
+    color bg_ = color::background;
+    color fl_ = color::fill;
 };
 
-}  // namespace Tetris
+}  // namespace tetris

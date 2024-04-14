@@ -2,42 +2,39 @@
 
 #include "TetrisCore.h"
 
-namespace Tetris
+namespace tetris
 {
-namespace Frame
+namespace frame
 {
-const vec2<int> locHor1 = {0, 24 * unit};
-const vec2<int> locHor2 = {0, yOffset* unit - 2};
-const vec2<int> sizeHor = {10 * unit, 2};
+const vec2<int> loc_hor1 = {0, 24 * unit};
+const vec2<int> loc_hor2 = {0, y_offset* unit - 2};
+const vec2<int> size_hor = {10 * unit, 2};
 
-const vec2<int> locVert = {10 * unit, yOffset* unit};
-const vec2<int> sizeVer = {2, 20 * unit};
-}  // namespace Frame
+const vec2<int> loc_vert = {10 * unit, y_offset* unit};
+const vec2<int> size_ver = {2, 20 * unit};
+}  // namespace frame
 
 void AreaElement::render(SDL_Renderer* renderer)
 {
     if (!renderer)
     {
-        TETRIS_ERROR("{0}: renderer is nullptr", __FUNCTION__);
-        return;
+        throw std::runtime_error("renderer must be initialized");
     }
-    _renderer = renderer;
+    renderer_ = renderer;
 }
 
-void AreaElement::draw() {}
-
-void AreaElement::createFrame() const
+void AreaElement::create_frame() const
 {
     std::vector<SDL_Rect> rects;
-    rects.push_back({Frame::locHor1.x, Frame::locHor1.y, Frame::sizeHor.x, Frame::sizeHor.y});
-    rects.push_back({Frame::locHor2.x, Frame::locHor2.y, Frame::sizeHor.x, Frame::sizeHor.y});
-    rects.push_back({Frame::locVert.x, Frame::locVert.y, Frame::sizeVer.x, Frame::sizeVer.y});
+    rects.push_back({frame::loc_hor1.x, frame::loc_hor1.y, frame::size_hor.x, frame::size_hor.y});
+    rects.push_back({frame::loc_hor2.x, frame::loc_hor2.y, frame::size_hor.x, frame::size_hor.y});
+    rects.push_back({frame::loc_vert.x, frame::loc_vert.y, frame::size_ver.x, frame::size_ver.y});
 
     for (const auto& rect : rects)
     {
-        SDL_SetRenderDrawColor(_renderer, _fl.r, _fl.g, _fl.b, _fl.a);
-        SDL_RenderFillRect(_renderer, &rect);
+        SDL_SetRenderDrawColor(renderer_, fl_.r, fl_.g, fl_.b, fl_.a);
+        SDL_RenderFillRect(renderer_, &rect);
     }
 }
 
-}  // namespace Tetris
+}  // namespace tetris
